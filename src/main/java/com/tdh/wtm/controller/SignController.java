@@ -17,13 +17,6 @@ public class SignController {
     @Autowired
     SignServiceImpl ser;
 
-    @RequestMapping("/login")
-    public String login(){
-        //即将跳转到login.jsp界面
-            System.out.println("即将进入sh界面");
-            return "index";
-        }
-
     //即将跳转到sign.jsp界面
     @RequestMapping("/tosign")
     public String doSign(HttpSession session) throws Exception{
@@ -33,7 +26,6 @@ public class SignController {
      //Integer count=ser.findById(id);
         Integer id=1;
 
-
         //获取签到的年月日
         Date date=new Date();
         SimpleDateFormat t=new SimpleDateFormat("yyyy-MM-dd");
@@ -42,8 +34,6 @@ public class SignController {
         int year = calendar.get(Calendar.YEAR);//获取年份
         int month = calendar.get(Calendar.MONTH) + 1;//获取月份
         int day=calendar.get(Calendar.DAY_OF_MONTH);
-
-
 
         //封装数据
         Sign sign=new Sign();
@@ -97,13 +87,5 @@ public class SignController {
             return "sign";
         }
 
-
-
-
-
-
 }
-
-
-
 }

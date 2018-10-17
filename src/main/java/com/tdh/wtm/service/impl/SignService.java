@@ -26,7 +26,7 @@ public class SignService implements SignServiceImpl {
     }
     @Override
     public Integer findByIdFalse(Sign sign) throws Exception {
-        return mapper.selectById(sign);
+        return mapper.selectByIdFalse(sign);
     }
 
 }
