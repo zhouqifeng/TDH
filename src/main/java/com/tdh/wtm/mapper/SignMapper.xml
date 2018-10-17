@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdh.wtm.mapper.SignMapper">
+    <insert id="insert"  parameterType="com.tdh.wtm.mapper.SignMapper">
+      insert into tb_sign(month,year,montent) value(#{month},#{year},#{montent})
+    </insert>
+
+    <select id="selectById" resultType="java.lang.Integer" parameterType="com.tdh.wtm.mapper.SignMapper">
+     SELECT COUNT(*) FROM tb_sign WHERE sid=#{sid} AND YEAR=#{year} AND MONTH=#{month}
+    </select>
+
+    <select id="selectByIdFalse" resultType="java.lang.Integer" parameterType="com.tdh.wtm.mapper.SignMapper">
+        SELECT COUNT(*) FROM tb_sign WHERE sid=#{sid} AND YEAR=#{year} AND MONTH=#{month} AND DAY=#{day}
+    </select>
+
+
+</mapper>
