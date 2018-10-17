@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdh.zqf.mapper.VacationMapper">
+	
+	<resultMap type="com.tdh.zqf.model.Vacation" id="baseResultMap">
+		<id property="id" column="id"/>
+		<result property="applyId" column="applyID"/>
+		<result property="approveId" column="approveID"/>
+		<result property="startTime" column="startTime"/>
+		<result property="endTime" column="endTime"/>
+		<result property="days" column="days"/>
+		<result property="reason" column="reason"/>
+		<result property="state" column="state"/>
+		<result property="username" column="username"/>
+	</resultMap>
+	
+	<select id="selectByapplyId"  resultType="com.tdh.zqf.model.Vacation">
+		select l.*,u.username from javaee.tb_leave as l LEFT JOIN javaee.tb_user as u ON l.applyid=u.id where l.applyid = #{applyId}
+	</select>
+	
+	<update id="updateById">
+		update javaee.tb_leave set state = #{state} where id = #{Id}
+	</update>
+	
+	<select id="selectById"  resultType="com.tdh.zqf.model.Vacation">
+		select l.*,u.username from javaee.tb_leave as l LEFT JOIN javaee.tb_user as u ON l.applyid=u.id where l.id = #{Id}
+	</select>
+
+	<select id="selectAll" resultType="com.tdh.zqf.model.Vacation" >
+		select 
+		l.*,
+    	u.username 
+		FROM javaee.tb_leave as l
+        LEFT JOIN javaee.tb_user as u
+        ON l.applyid=u.id 
+        where approveId = #{approveId}
+	</select>
+	
+	<select id="selectAdmin" resultType="com.tdh.zqf.model.User" >
+		select * from javaee.tb_user where isadmin = 1
+	</select>
+	
+	<insert id="insertVacation" parameterType="com.tdh.zqf.model.Leave" >
+		insert into javaee.tb_leave(applyId,approveId,startTime,endTime,days,reason,state)  value(#{applyId},#{approveId},#{startTime},#{endTime},#{days},#{reason},#{state})
+	</insert>
+	
+</mapper>
