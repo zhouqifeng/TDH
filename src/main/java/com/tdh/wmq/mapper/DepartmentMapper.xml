@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 命名空间 用来标识该mapper文件 -->
+<mapper namespace="com.tdh.wmq.mapper.DepartmentMapper">
+
+    <select id="selectDepartments" resultType="com.tdh.wmq.model.Department">
+        select did,dname from tb_department
+    </select>
+
+    <select id="selectByDid" resultType="com.tdh.wmq.model.Department">
+        select did,dname from tb_department where did=#{did}
+    </select>
+
+</mapper>
