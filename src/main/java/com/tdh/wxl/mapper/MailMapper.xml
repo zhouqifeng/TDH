@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdh.wxl.mapper.MailMapper">
+
+
+
+	<!--查询所有的接收者，除自己外-->
+    <select id="selectAllReceiver" parameterType="User" resultType="User">
+		SELECT uuid,id,username,password,nickname,age,sex,phone,address,isadmin,did FROM tb_user WHERE id!=#{id}
+	</select>
+	<!--查询所有发给自己的邮件-->
+	<select id="selectAllToMe" parameterType="java.util.Map" resultType="Mail">
+
+
+        select
+        id,fromId,toId,title,content,attachment,isread,createTime,isdelete
+        from tb_mail
+        <where>
+            <if test="uid!='' and uid!=null">
+                and isDelete=0
+            </if>
+            <if test="uid!='' and uid!=null">
+                and toId=#{uid}
+            </if>
+
+            <if test="search!='' and search!=null">
+                and title like CONCAT('%', #{search}, '%')
+                or content like CONCAT('%', #{search}, '%')
+                or attachment like CONCAT('%', #{search}, '%')
+                or createTime like CONCAT('%', #{search}, '%')
+                or isread like CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+        <if test="order!='' and order!=null">
+            order by ${sort} ${order}
+        </if>
+        <if test="offset!=null and limit!=null">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+	<!--查看发给我邮件的数量-->
+	<select id="selectCountToMe" parameterType="User" resultType="java.lang.Integer">
+		select count(*) from tb_mail where toId=#{id} and isDelete=0
+
+
+	</select>
+    <!--写邮件-->
+    <insert id="insertMail" parameterType="Mail" >
+		insert into tb_mail (fromId,toId,title,content,attachment,createTime) values (#{fromId},#{toId},#{title},#{content},#{attachment},#{createTime})
+
+	</insert>
+    <!--查看邮件-->
+    <update id="updateIsRead" parameterType="java.lang.Integer">
+        update tb_mail set isRead=1 where id=#{id}
+    </update>
+    <!--查看当前邮件的发件人-->
+    <select id="selectCurrentUser" parameterType="java.lang.Integer" resultType="User">
+        select uuid,id,username,nickname from tb_user where id=#{fromId}
+
+    </select>
+    <!--删除邮件-->
+    <update id="updateIsDelete" parameterType="java.lang.Integer">
+        update tb_mail set isDelete=1 where id=#{id}
+    </update>
+    <!--查看所有我的垃圾邮件箱-->
+    <!--垃圾邮件的数量-->
+    <select id="selectMyCountSpam" parameterType="User" resultType="java.lang.Integer">
+		select count(*) from tb_mail where toId=#{id} and isDelete=1
+	</select>
+    <!--垃圾邮件的集合-->
+    <select id="selectMyAllSpam" parameterType="java.util.Map" resultType="Mail">
+        select
+        id,fromId,toId,title,content,attachment,isread,createTime,isdelete
+        from tb_mail
+        <where>
+            <if test="uid!='' and uid!=null">
+                and isDelete=1
+            </if>
+            <if test="uid!='' and uid!=null">
+                and toId=#{uid}
+            </if>
+
+            <if test="search!='' and search!=null">
+                and title like CONCAT('%', #{search}, '%')
+                or content like CONCAT('%', #{search}, '%')
+                or attachment like CONCAT('%', #{search}, '%')
+                or createTime like CONCAT('%', #{search}, '%')
+                or isread like CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+        <if test="order!='' and order!=null">
+            order by ${sort} ${order}
+        </if>
+        <if test="offset!=null and limit!=null">
+            limit #{offset},#{limit}
+        </if>
+
+    </select>
+    <!--垃圾邮件还原-->
+
+    <update id="reductionMyDelete" parameterType="java.lang.Integer">
+        update tb_mail set isDelete=0 where id=#{id}
+    </update>
+    <!--删除邮件-->
+    <update id="deleteMySpam" parameterType="java.lang.Integer">
+        update tb_mail set isDelete=2 where id=#{id}
+
+    </update>
+
+</mapper>
