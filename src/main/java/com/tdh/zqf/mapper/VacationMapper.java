@@ -20,5 +20,5 @@ public interface VacationMapper {
     public void insertVacation(Leave leave) throws Exception;
 
     public void updateById(@Param(value="Id")Integer Id,@Param(value="state")Integer state) throws Exception;
-    
+
 }
