@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdh.hc.mapper.NewsMapper">
+<resultMap id="newstouser" type="com.tdh.hc.model.News">
+    <id column="UUID" property="uuid"/>
+    <result column="TITLE" property="title"/>
+    <result column="CONTENT" property="content"/>
+    <result column="IMGLINKS" property="imglinks"/>
+    <result column="PUSHTIME" property="pushtime"/>
+    <result column="UID" property="uid"/>
+    <result column="ISDELETE" property="isdelete"/>
+    <association property="user" javaType="com.tdh.hc.model.User">
+        <id column="UUID" property="uuid"/>
+        <result column="ID" property="id"/>
+        <result column="USERNAME" property="username"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="NICKNAME" property="nickname"/>
+        <result column="AGE" property="age"/>
+        <result column="SEX" property="sex"/>
+        <result column="PHONE" property="phone"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="ISADMIN" property="isadmin"/>
+    </association>
+</resultMap>
+
+<select id="selectNews" resultType="com.tdh.hc.model.News" parameterType="java.lang.String" resultMap="newstouser">
+	select tb_news.uuid,title,content,imglinks,pushtime,uid,isdelete,nickname from tb_news JOIN tb_user ON tb_news.uid=tb_user.id and tb_news.uuid=#{uuid}
+</select>
+
+<select id="selectNewsCount" resultType="Integer">
+	SELECT COUNT(uuid) FROM tb_news
+</select>
+
+<insert id="insertNews" parameterType="com.tdh.hc.model.News">
+	insert into tb_news values(#{uuid},#{title},#{content},#{imglinks},#{pushtime},#{uid},#{isdelete})
+</insert>
+
+<update id="updateNews" parameterType="com.tdh.hc.model.News">
+    update tb_news set title=#{title},content=#{content},imglinks=#{imglinks} where uuid=#{uuid}
+</update>
+
+<update id="deleteNews" parameterType="java.lang.String">
+    update tb_news set isdelete=0 where uuid=#{uuid}
+</update>
+
+<select id="selectAllNews" parameterType="map" resultMap="newstouser">
+    SELECT tb_news.uuid,title,content,imglinks,pushtime,isdelete,uid,nickname,username FROM tb_news,tb_user where
+        tb_news.uid=tb_user.id and isdelete=1
+        <if test="search!=null and search!=''">
+            and content like CONCAT('%',#{search},'%') or title like CONCAT('%',#{search},'%')
+        </if>
+        <if test="order!=null">
+          order by ${sort} ${order}
+        </if>
+        <if test="offset!=null and limit!=null">
+          limit #{offset},#{limit}
+        </if>
+</select>
+</mapper>
