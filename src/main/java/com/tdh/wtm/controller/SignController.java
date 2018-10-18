@@ -17,21 +17,14 @@ public class SignController {
     @Autowired
     SignServiceImpl ser;
 
-    @RequestMapping("/login")
-    public String login(){
-        //即将跳转到login.jsp界面
-            System.out.println("即将进入sh界面");
-            return "index";
-        }
-
     //即将跳转到sign.jsp界面
     @RequestMapping("/tosign")
     public String doSign(HttpSession session) throws Exception{
-     //获取sessionUser里的值     User user=session.getAttribute("sessionUser");
-     //获取id     Integer id=user.getId();
-     //获取签到天数
-     //Integer count=ser.findById(id);
-        Integer id=1;
+          //获取sessionUser里的值     User user=session.getAttribute("sessionUser");
+           //获取id     Integer id=user.getId();
+          //获取签到天数
+          //Integer count=ser.findById(id);
+          Integer id=1;
 
 
         //获取签到的年月日
@@ -66,6 +59,7 @@ public class SignController {
     //插入签到记录
     @RequestMapping("/save")
     public String doSave(Sign sign,HttpSession session)throws Exception{
+
         sign.setMontent(1);
 
         //获取签到的年月日
@@ -83,16 +77,13 @@ public class SignController {
         session.setAttribute("sign",sign);
         //判断今天是否签到过
         Integer b=ser.findByIdFalse(sign);
-        if(b>0){
+        System.out.println(b);
+        if(b!=1){
             //插入签到记录
             Integer a=ser.save(sign);
-
             Integer count=ser.findById(sign);
             session.setAttribute("count",count);
-
-
             return "sign";
-
         }else{
             return "sign";
         }

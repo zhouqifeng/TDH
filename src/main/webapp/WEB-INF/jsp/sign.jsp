@@ -153,8 +153,8 @@
               <div class="signBtn">
                 <strong id="sign-txt" onclick="sign()">签到</strong>
                 <c:if test="${sign.montent==1}">
-                <span id="sign">已签到</span>
-              </c:if>
+                  <span id="sign">已签到,请忽重复签到</span>
+                </c:if>
                 <span id="sign"></span>
               </div>
             </div>
@@ -198,16 +198,25 @@
         var endtime=9;
         var startfen=0;
         var endfen=59;
-
-        if((hours>endtime||fenzhong>startfen)||(hours<starttime ||fenzhong>startfen)){
-                alert("请在规定的时间内签到  8-9");
+        if((hours==9&&fenzhong==startfen)||hours==8){
+            document.getElementById("sign").innerHTML = '今天已签到，请忽重复签到';
+            location="${pageContext.request.contextPath}/save";
         }else{
-                document.getElementById("sign").innerHTML = '今天已签到';
-                location="${pageContext.request.contextPath}/save";
-
+            alert("请在规定的时间内签到8-9");
         }
-    }
 
+    }
 </script>
   </body>
 </html>
+
+
+
+
+<!--
+
+
+
+
+
+-->

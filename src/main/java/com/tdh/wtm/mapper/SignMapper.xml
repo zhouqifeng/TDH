@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tdh.wtm.mapper.SignMapper">
     <insert id="insert"  parameterType="com.tdh.wtm.mapper.SignMapper">
-      insert into tb_sign(month,year,montent) value(#{month},#{year},#{montent})
+      insert into tb_sign(month,year,montent,day,sid) value(#{month},#{year},#{montent},#{day},#{sid})
     </insert>
 
     <select id="selectById" resultType="java.lang.Integer" parameterType="com.tdh.wtm.mapper.SignMapper">
