@@ -1,6 +1,6 @@
 package com.tdh.wmq.service;
 
-import com.tdh.wmq.model.User;
+import com.tdh.login.model.User;
 
 public interface UserService {
 

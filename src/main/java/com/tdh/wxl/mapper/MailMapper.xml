@@ -7,7 +7,7 @@
 
 
 	<!--查询所有的接收者，除自己外-->
-    <select id="selectAllReceiver" parameterType="com.tdh.wxl.model.User" resultType="com.tdh.wxl.model.User">
+    <select id="selectAllReceiver" parameterType="com.tdh.login.model.User" resultType="com.tdh.login.model.User">
 		SELECT uuid,id,username,password,nickname,age,sex,phone,address,isadmin,did FROM tb_user WHERE id!=#{id}
 	</select>
 	<!--查询所有发给自己的邮件-->
@@ -41,7 +41,7 @@
         </if>
     </select>
 	<!--查看发给我邮件的数量-->
-	<select id="selectCountToMe" parameterType="com.tdh.wxl.model.User" resultType="java.lang.Integer">
+	<select id="selectCountToMe" parameterType="com.tdh.login.model.User" resultType="java.lang.Integer">
 		select count(*) from tb_mail where toId=#{id} and isDelete=0
 
 
@@ -56,7 +56,7 @@
         update tb_mail set isRead=1 where id=#{id}
     </update>
     <!--查看当前邮件的发件人-->
-    <select id="selectCurrentUser" parameterType="java.lang.Integer" resultType="com.tdh.wxl.model.User">
+    <select id="selectCurrentUser" parameterType="java.lang.Integer" resultType="com.tdh.login.model.User">
         select uuid,id,username,nickname from tb_user where id=#{fromId}
 
     </select>
@@ -66,7 +66,7 @@
     </update>
     <!--查看所有我的垃圾邮件箱-->
     <!--垃圾邮件的数量-->
-    <select id="selectMyCountSpam" parameterType="com.tdh.wxl.model.User" resultType="java.lang.Integer">
+    <select id="selectMyCountSpam" parameterType="com.tdh.login.model.User" resultType="java.lang.Integer">
 		select count(*) from tb_mail where toId=#{id} and isDelete=1
 	</select>
     <!--垃圾邮件的集合-->

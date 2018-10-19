@@ -2,7 +2,7 @@ package com.tdh.hc.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tdh.hc.model.News;
-import com.tdh.hc.model.User;
+import com.tdh.login.model.User;
 import com.tdh.hc.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

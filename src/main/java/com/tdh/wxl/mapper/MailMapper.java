@@ -2,7 +2,7 @@ package com.tdh.wxl.mapper;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tdh.wxl.model.Mail;
-import com.tdh.wxl.model.User;
+import com.tdh.login.model.User;
 
 import java.util.List;
 

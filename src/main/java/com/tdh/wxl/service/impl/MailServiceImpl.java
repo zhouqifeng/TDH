@@ -3,7 +3,7 @@ package com.tdh.wxl.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.tdh.wxl.mapper.MailMapper;
 import com.tdh.wxl.model.Mail;
-import com.tdh.wxl.model.User;
+import com.tdh.login.model.User;
 import com.tdh.wxl.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,11 +53,13 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public Integer selectCountSpams(User user) {
+        System.out.println("service:"+user.getId());
         return mapper.selectMyCountSpam(user);
     }
 
     @Override
     public Integer reductionDelete(Integer id) {
+        System.out.println("serviceid:I"+id);
         return mapper.reductionMyDelete(id);
     }
 

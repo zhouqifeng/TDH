@@ -112,17 +112,16 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="writemail"><i class="icon fa fa-circle-o"></i> 写邮件</a></li>
                 <li><a class="treeview-item" href="receivemail"><i class="icon fa fa-circle-o"></i> 收件箱</a></li>
-                <li><a class="treeview-item" href="sendoutmail"><i class="icon fa fa-circle-o"></i> 已发送</a></li>
                 <li><a class="treeview-item" href="spam"><i class="icon fa fa-circle-o"></i> 垃圾箱</a></li>
             </ul>
         </li>
-        <li><a class="app-menu__item" href="sign"><i class="app-menu__icon fa fa-calendar-check-o"></i><span class="app-menu__label">日常签到</span></a></li>
-        <li><a class="app-menu__item" href="vacation"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">休假管理</span></a></li>
+        <li><a class="app-menu__item" href="tosign"><i class="app-menu__icon fa fa-calendar-check-o"></i><span class="app-menu__label">日常签到</span></a></li>
+        <li><a class="app-menu__item" href="vacationlist"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">休假管理</span></a></li>
         <li class="treeview"><a class="app-menu__item active" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">权限管理</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="personalAccount"><i class="icon fa fa-circle-o"></i> 个人账户</a></li>
                 <c:if test="${sessionUser.isadmin==1}">
-                    <li><a class="treeview-item active" href="manageAccount"><i class="icon fa fa-circle-o"></i> 管理账户</a></li>
+                    <li><a class="treeview-item" href="manageAccount"><i class="icon fa fa-circle-o"></i> 管理账户</a></li>
                 </c:if>
             </ul>
         </li>
@@ -136,10 +135,6 @@
             <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
             <p>A free and open source Bootstrap 4 admin template</p>
         </div>
-        <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="logout">注销</a></li>
-        </ul>
     </div>
 
     <div class="row">

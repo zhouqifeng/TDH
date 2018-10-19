@@ -6,11 +6,11 @@
 <!-- namespace 命名空间 用来标识该mapper文件 -->
 <mapper namespace="com.tdh.wmq.mapper.UserMapper">
 
-    <select id="selectUserById" resultType="com.tdh.wmq.model.User">
+    <select id="selectUserById" resultType="com.tdh.login.model.User">
         select * from tb_user where id = #{id}
     </select>
 
-    <update id="updateUserInfo" parameterType="com.tdh.wmq.model.User">
+    <update id="updateUserInfo" parameterType="com.tdh.login.model.User">
         update tb_user set nickname=#{nickname},age=#{age},sex=#{sex},phone=#{phone},address=#{address} where id=#{id}
     </update>
 

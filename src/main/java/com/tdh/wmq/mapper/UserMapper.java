@@ -1,6 +1,6 @@
 package com.tdh.wmq.mapper;
 
-import com.tdh.wmq.model.User;
+import com.tdh.login.model.User;
 
 public interface UserMapper {
 

@@ -1,5 +1,6 @@
 package com.tdh.wtm.controller;
 
+import com.tdh.login.model.User;
 import com.tdh.wtm.model.Sign;
 import com.tdh.wtm.service.SignServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class SignController {
            //获取id     Integer id=user.getId();
           //获取签到天数
           //Integer count=ser.findById(id);
-          Integer id=1;
-
+        User user= (User) session.getAttribute("sessionUser");
+        Integer id=user.getId();
         //获取签到的年月日
         Date date=new Date();
         SimpleDateFormat t=new SimpleDateFormat("yyyy-MM-dd");
@@ -58,7 +59,8 @@ public class SignController {
     public String doSave(Sign sign,HttpSession session)throws Exception{
 
         sign.setMontent(1);
-
+        User user= (User) session.getAttribute("sessionUser");
+        Integer id=user.getId();
         //获取签到的年月日
         Date date=new Date();
         Calendar calendar = Calendar.getInstance();//日历对象
@@ -67,7 +69,7 @@ public class SignController {
         int month = calendar.get(Calendar.MONTH) + 1;//获取月份
         int day=calendar.get(Calendar.DAY_OF_MONTH);
         //封装数据
-        sign.setSid(1);
+        sign.setSid(id);
         sign.setYear(year);
         sign.setMonth(month);
         sign.setDay(day);

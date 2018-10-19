@@ -4,8 +4,7 @@
 
 <html lang="en">
 <head>
-    <meta name="description"
-          content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:site" content="@pratikborsadiya">
@@ -16,8 +15,7 @@
     <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description"
-          content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <title>Bootstrap Elements - Vali Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,10 +23,8 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css"
-          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
     <style>
 
 
@@ -134,7 +130,7 @@
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-                <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                <li><a class="dropdown-item" href="logout"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -142,56 +138,35 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
-                                        src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg"
-                                        alt="User Image">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
-            <p class="app-sidebar__user-name">John Doe</p>
-            <p class="app-sidebar__user-designation">Frontend Developer</p>
+            <p class="app-sidebar__user-name">${sessionUser.nickname}</p>
+            <c:if test="${sessionUser.isadmin==0}">
+                <p class="app-sidebar__user-designation">普通用户</p>
+            </c:if>
+            <c:if test="${sessionUser.isadmin==1}">
+                <p class="app-sidebar__user-designation">管理员</p>
+            </c:if>
         </div>
     </div>
     <ul class="app-menu">
-        <li><a class="app-menu__item active" href="index.html"><i class="app-menu__icon fa fa-file-text"
-                                                                  aria-hidden="true"></i><span class="app-menu__label">公司通告</span></a>
-        </li>
-        <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-user-circle"></i><span
-                class="app-menu__label">个人信息</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                class="app-menu__icon fa fa-envelope"></i><span class="app-menu__label">邮件管理</span><i
-                class="treeview-indicator fa fa-angle-right"></i></a>
+        <li><a class="app-menu__item" href="index"><i class="app-menu__icon fa fa-file-text" aria-hidden="true"></i><span class="app-menu__label">公司通告</span></a></li>
+        <li><a class="app-menu__item" href="userInfo"><i class="app-menu__icon fa fa-user-circle"></i><span class="app-menu__label">个人信息</span></a></li>
+        <li class="treeview"><a class="app-menu__item active" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-envelope"></i><span class="app-menu__label">邮件管理</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="writemail"><i class="icon fa fa-circle-o"></i> 写邮件</a></li>
                 <li><a class="treeview-item" href="receivemail"><i class="icon fa fa-circle-o"></i> 收件箱</a></li>
-                <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank"
-                       rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
-                <li><a class="treeview-item" href="sendoutmail"><i class="icon fa fa-circle-o"></i> 已发送</a></li>
-                <li><a class="treeview-item" href="spam"><i class="icon fa fa-circle-o"></i> 垃圾邮件</a></li>
+                <li><a class="treeview-item" href="spam"><i class="icon fa fa-circle-o"></i> 垃圾箱</a></li>
             </ul>
         </li>
-        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-calendar-check-o"></i><span
-                class="app-menu__label">日常签到</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">休假管理</span><i
-                class="treeview-indicator fa fa-angle-right"></i></a>
+        <li><a class="app-menu__item" href="tosign"><i class="app-menu__icon fa fa-calendar-check-o"></i><span class="app-menu__label">日常签到</span></a></li>
+        <li><a class="app-menu__item" href="vacationlist"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">休假管理</span></a></li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">权限管理</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
-                    Components</a></li>
-                <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
-                    Components</a></li>
-                <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
-                    Samples</a></li>
-                <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
-                    Notifications</a></li>
-            </ul>
-        </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                class="app-menu__icon fa fa-users"></i><span class="app-menu__label">权限管理</span><i
-                class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic
-                    Tables</a></li>
-                <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data
-                    Tables</a></li>
+                <li><a class="treeview-item" href="personalAccount"><i class="icon fa fa-circle-o"></i> 个人账户</a></li>
+                <c:if test="${sessionUser.isadmin==1}">
+                    <li><a class="treeview-item" href="manageAccount"><i class="icon fa fa-circle-o"></i> 管理账户</a></li>
+                </c:if>
             </ul>
         </li>
     </ul>
@@ -202,10 +177,6 @@
             <h1><i class="fa fa-laptop"></i> Bootstrap Elements</h1>
             <p>Bootstrap Components</p>
         </div>
-        <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#">Bootstrap Elements</a></li>
-        </ul>
     </div>
     <!-- Buttons-->
     <div class="container-fluid col-sm-6">
@@ -299,7 +270,7 @@
         }
 
         var param = $('#myForm').serialize();
-        alert(param);
+       // alert(param);
         var form = document.getElementById("myForm");
         form.action = "${pageContext.request.contextPath}/tosendmail";
         form.submit();

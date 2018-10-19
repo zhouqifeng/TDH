@@ -1,7 +1,7 @@
 package com.tdh.wmq.service.impl;
 
 import com.tdh.wmq.mapper.UserMapper;
-import com.tdh.wmq.model.User;
+import com.tdh.login.model.User;
 import com.tdh.wmq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

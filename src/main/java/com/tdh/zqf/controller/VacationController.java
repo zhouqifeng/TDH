@@ -3,7 +3,7 @@ package com.tdh.zqf.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tdh.zqf.model.Leave;
-import com.tdh.zqf.model.User;
+import com.tdh.login.model.User;
 import com.tdh.zqf.model.Vacation;
 import com.tdh.zqf.service.IVacationService;
 import org.springframework.beans.factory.annotation.Autowired;

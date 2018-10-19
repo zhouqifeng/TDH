@@ -2,7 +2,7 @@ package com.tdh.wxl.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tdh.wxl.model.Mail;
-import com.tdh.wxl.model.User;
+import com.tdh.login.model.User;
 import com.tdh.wxl.service.MailService;
 import com.tdh.wxl.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,24 @@ public class MailController {
 //     public String path(@PathVariable String path){
 //         return path;
 //     }
+
+    @RequestMapping(value="/receivemail")
+    public String receiveMail(){
+        return "receivemail";
+    }
+   /* @RequestMapping(value="/spam")
+    public String spamMail(){
+        System.out.println("spam1");
+        return "spam";
+    }*/
+
     /*写邮件*/
     @RequestMapping(value = "/writemail",method = RequestMethod.GET,produces="application/json;charset=UTF-8")
     public String toSend(HttpServletRequest request){
-        User user=new User();
+        //User user=new User();
         //user.setId(1);
+        User user=(User)request.getSession().getAttribute("sessionUser");
+
         List<User> receivers=mailService.selectAll(user);
         if(receivers!=null){
             request.setAttribute("receivers",receivers);
@@ -56,6 +69,9 @@ public class MailController {
     @RequestMapping(value="/tosendmail",method = RequestMethod.POST,produces="application/json;charset=UTF-8")
     public String toSend(Mail mail, MultipartFile file,HttpServletRequest request) throws IOException {
         String attachment="upload/"+getUUID(file);
+        User user=(User)request.getSession().getAttribute("sessionUser");
+        System.out.println(user.getId());
+        mail.setFromId(user.getId());
         mail.setAttachment(attachment);
         String realpath=request.getServletContext().getRealPath(attachment);
         System.out.println(realpath);
@@ -69,9 +85,9 @@ public class MailController {
     /*收件箱*/
     @RequestMapping(value = "/mymails",method = RequestMethod.POST,produces="application/json;charset=UTF-8")
     @ResponseBody
-    public Object mails(@RequestBody JSONObject jsonObject, HttpServletRequest request){
+    public Object mails(@RequestBody JSONObject jsonObject, HttpSession session){
         //System.out.println("jsonObject:"+jsonObject);
-        Object obj=request.getAttribute("sessionUser");
+        Object obj=session.getAttribute("sessionUser");
         User user=(User)obj;
         //User user= new User();
         //user.setId(2);
@@ -155,17 +171,27 @@ public class MailController {
         }
         return Constants.FAIL;
     }
+    @RequestMapping(value = "/spam",method = RequestMethod.GET,produces="application/json;charset=UTF-8")
+    public Object spams1(){
+        System.out.println("spam2");
+        return "spam";
+    }
+
+
     /*垃圾邮件箱*/
     @RequestMapping(value = "/spams",method = RequestMethod.POST,produces="application/json;charset=UTF-8")
     @ResponseBody
-    public Object spams(@RequestBody JSONObject jsonObject, HttpServletRequest request){
-        //System.out.println("jsonObject:"+jsonObject);
-        Object obj=request.getAttribute("sessionUser");
-        User user= new User();
-        user.setId(2);
+    public Object spams(@RequestBody JSONObject jsonObject, HttpSession session){
+        System.out.println("jsonObject:"+jsonObject);
+        User user=(User) session.getAttribute("sessionUser");
+
+        System.out.println(user.getId());
+        //User user= new User();
+        //user.setId(2);
         jsonObject.put("uid",user.getId());
         Integer count=mailService.selectCountSpams(user);
         List<Mail> spams=mailService.selectAllSpams(jsonObject);
+        System.out.println("count:"+count);
         jsonObject.put("total",count);
         jsonObject.put("rows",spams);
         return jsonObject;
@@ -174,9 +200,9 @@ public class MailController {
     @RequestMapping(value = "/toreturnmodifyisdelete/{id}",method = RequestMethod.PUT,produces="application/json;charset=UTF-8")
     @ResponseBody
     public String returnDelete(@PathVariable("id") Integer id){
-        //System.out.println("id:"+id);
+        System.out.println("id:"+id);
         Integer integer=mailService.reductionDelete(id);
-        //System.out.println("integer:"+integer);
+        System.out.println("integer:"+integer);
         if(integer!=0){
             return Constants.SUCCESS;
         }

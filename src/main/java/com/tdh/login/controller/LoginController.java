@@ -20,6 +20,12 @@ public class LoginController {
     @Autowired
     LoginService ser;
 
+    @RequestMapping(value = "/face")
+    public String tozhenai() {
+        return "face";
+    }
+
+
     @RequestMapping(value = "/login")
     public String tologin() {
         return "login";

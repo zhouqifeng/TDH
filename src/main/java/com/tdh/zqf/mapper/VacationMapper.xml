@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where approveId = #{approveId}
 	</select>
 	
-	<select id="selectAdmin" resultType="com.tdh.zqf.model.User" >
+	<select id="selectAdmin" resultType="com.tdh.login.model.User" >
 		select * from javaee.tb_user where isadmin = 1
 	</select>
 	

@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <select id="selectNewsCount" resultType="Integer">
-	SELECT COUNT(uuid) FROM tb_news
+	SELECT COUNT(uuid) FROM tb_news where isdelete=1
 </select>
 
 <insert id="insertNews" parameterType="com.tdh.hc.model.News">

@@ -9,8 +9,5 @@
         <module name="tdh" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="tdh" target="6" />
-    </bytecodeTargetLevel>
   </component>
 </project>

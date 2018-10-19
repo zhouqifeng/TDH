@@ -1,7 +1,7 @@
 package com.tdh.zqf.service;
 
 import com.tdh.zqf.model.Leave;
-import com.tdh.zqf.model.User;
+import com.tdh.login.model.User;
 import com.tdh.zqf.model.Vacation;
 
 import java.util.List;
