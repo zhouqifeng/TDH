@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tdh.login.mapper.LoginMapper">
+
+    <select id="selectUserByUsernameAndPassword" parameterType="com.tdh.login.model.User" resultType="com.tdh.login.model.User">
+        select uuid,id,username,password,nickname,age,sex,phone,address,isadmin,did from tb_user where username="${username}" and password="${password}";
+    </select>
+
+</mapper>

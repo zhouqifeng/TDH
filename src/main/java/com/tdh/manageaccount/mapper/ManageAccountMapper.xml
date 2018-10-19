@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tdh.manageaccount.mapper.ManageAccountMapper">
+
+    <select id="selectUserCount" resultType="java.lang.Integer">
+        select count(*) from tb_user;
+    </select>
+
+    <select id="selectUsersWithLimit" resultType="com.alibaba.fastjson.JSONObject" parameterType="com.alibaba.fastjson.JSONObject">
+        select uuid,id,username,password,nickname,age,sex,phone,address,isadmin,did from tb_user
+        <if test="search!=null and search!=''">
+            where username like '%${search}%'
+        </if>
+        order by isadmin limit #{offset},#{limit};
+    </select>
+
+    <insert id="insertUser" parameterType="com.tdh.login.model.User">
+        insert into tb_user(uuid,username,password,nickname,age,sex,phone,address,did) values(#{uuid},#{username},#{password},#{nickname},#{age},#{sex},#{phone},#{address},#{did});
+    </insert>
+
+    <update id="updateUserDidById" parameterType="com.tdh.login.model.User">
+        update tb_user set did=#{did} where id=#{id};
+    </update>
+
+    <select id="selectUserById" parameterType="com.tdh.login.model.User" resultType="com.tdh.login.model.User">
+        select uuid,id,username,password,nickname,age,sex,phone,address,isadmin,did from tb_user where id=#{id};
+    </select>
+
+    <update id="deleteUserById" parameterType="com.tdh.login.model.User">
+        update tb_user set isadmin=2 where id=#{id};
+    </update>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tdh.personalaccount.mapper.PersonalAccountMapper">
+
+    <select id="selectUserByUsername" resultType="com.tdh.login.model.User" parameterType="com.tdh.login.model.User">
+        select username from tb_user where username=#{username};
+    </select>
+
+    <update id="updateUserById" parameterType="com.tdh.login.model.User">
+        update tb_user set username=#{username},password=#{password} where id=#{id};
+    </update>
+
+    <select id="selectUserById" parameterType="com.tdh.login.model.User" resultType="com.tdh.login.model.User">
+        select uuid,id,username,password,nickname,age,sex,phone,address,isadmin,did from tb_user where id=#{id};
+    </select>
+
+</mapper>

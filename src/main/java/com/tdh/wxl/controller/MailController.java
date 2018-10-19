@@ -32,10 +32,10 @@ public class MailController {
 //    public String toIndex(){
 //        return "index";
 //    }
-   @RequestMapping(value="/{path}",method = RequestMethod.GET)
-    public String path(@PathVariable String path){
-        return path;
-    }
+//    @RequestMapping(value="/{path}",method = RequestMethod.GET)
+//     public String path(@PathVariable String path){
+//         return path;
+//     }
     /*写邮件*/
     @RequestMapping(value = "/writemail",method = RequestMethod.GET,produces="application/json;charset=UTF-8")
     public String toSend(HttpServletRequest request){

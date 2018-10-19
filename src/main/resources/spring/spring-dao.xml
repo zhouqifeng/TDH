@@ -38,7 +38,7 @@
         <!--注入会话工厂-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!--注入DAO层所在包的基础路径-->
-        <property name="basePackage" value="com.tdh.hc.mapper,com.tdh.wmq.mapper,com.tdh.wtm.mapper,com.tdh.wxl.mapper,com.tdh.xwy.mapper,com.tdh.zqf.mapper"/>
+        <property name="basePackage" value="com.tdh.hc.mapper,com.tdh.wmq.mapper,com.tdh.wtm.mapper,com.tdh.wxl.mapper,com.tdh.xwy.mapper,com.tdh.zqf.mapper,com.tdh.login.mapper,com.tdh.manageaccount.mapper,com.tdh.personalaccount.mapper"/>
     </bean>
 
     <!--扫描DAO层的注解类,以下注解是为了扫描这个注解：@Repository-->

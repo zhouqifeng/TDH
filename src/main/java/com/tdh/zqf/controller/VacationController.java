@@ -21,28 +21,23 @@ public class VacationController {
     @Autowired
     private IVacationService ser;
 
-    @RequestMapping("/index")
-    public String toIndex(){
-        return "index";
-    }
-
     @RequestMapping("/vacationlist")
     public String findVacationList(HttpSession session, Model model) {
 
-        User sessionUser = new User();
-        sessionUser.setUuid("1");
-        sessionUser.setId(2);
-        sessionUser.setUsername("小刘");
-        sessionUser.setPassword("111");
-        sessionUser.setNickname("xiaoliu");
-        sessionUser.setAge(25);
-        sessionUser.setSex(1);
-        sessionUser.setPhone("18890567734");
-        sessionUser.setAddress("上海");
-        sessionUser.setIsadmin(1);
-        sessionUser.setDid(1);
-
-        session.setAttribute("sessionUser",sessionUser);
+        // User sessionUser = new User();
+        // sessionUser.setUuid("1");
+        // sessionUser.setId(2);
+        // sessionUser.setUsername("小刘");
+        // sessionUser.setPassword("111");
+        // sessionUser.setNickname("xiaoliu");
+        // sessionUser.setAge(25);
+        // sessionUser.setSex(1);
+        // sessionUser.setPhone("18890567734");
+        // sessionUser.setAddress("上海");
+        // sessionUser.setIsadmin(1);
+        // sessionUser.setDid(1);
+        //
+        // session.setAttribute("sessionUser",sessionUser);
 
         User user = (User) session.getAttribute("sessionUser");
         if (user.getIsadmin() == 0) {
